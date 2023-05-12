@@ -5,7 +5,7 @@ import pandas as pd
 from django.http import JsonResponse
 
 
-def words():
+def get_words():
     words = Word.objects.all()
     df = pd.DataFrame(list(words.values()))
 
@@ -20,7 +20,7 @@ def words():
 
 
 def home(request):
-    df = words()
+    df = get_words()
     data = df.to_dict('records')
 
     return render(request, 'main/home.html', {'data': data})
